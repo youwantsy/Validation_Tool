@@ -2,18 +2,18 @@
     "dataset_path": "test.json",
     "dataset_length": 120,
     "line": [
-        "float",
-        "NoneType"
+        "NoneType",
+        "float"
     ],
     "std_stccb": [
-        "float",
-        "str",
         "int",
-        "NoneType"
+        "str",
+        "NoneType",
+        "float"
     ],
     "std_proctime": [
         "str",
-        "int",
-        "NoneType"
+        "NoneType",
+        "int"
     ]
 }

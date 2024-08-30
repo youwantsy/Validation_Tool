@@ -58,15 +58,33 @@ def get_parameter(obj:object, name: str):
 
     return param
 
-def list_comparing(list1: list, list2: list):
+def list_comparing(list1: list, list2: list) -> dict:
     '''
     리스트 2개를 입력받아 각각의 요소 비교
-    :param list1: 
-    :param list2: 
+    :param list1: str값 리스트
+    :param list2: str값 리스트
     :return: 공통인자, list1에만 있는 인자, list2에만 있는 인자
     '''
-    common_elements = set(list1) & set(list2)  # 공통 요소
-    list1_not_in_list2 = set(list1) - set(list2)  # list1에만 있는 요소
-    list2_not_in_list1 = set(list2) - set(list1)
+    list1_lower = [value.lower() for value in list1]
+    list2_lower = [value.lower() for value in list2]
 
-    return
+    compare_dict = {}
+
+    # 공통 요소
+    common_elements_lower = set(list1_lower) & set(list2_lower)
+    common_elements = [value for value in list1 if value.lower() in common_elements_lower] + \
+                      [value for value in list2 if value.lower() in common_elements_lower]
+
+    # list1에만 있는 요소
+    list1_not_in_list2_lower = set(list1_lower) - set(list2_lower)
+    list1_not_in_list2 = [value for value in list1 if value.lower() in list1_not_in_list2_lower]
+
+    # list2에만 있는 요소
+    list2_not_in_list1_lower = set(list2_lower) - set(list1_lower)
+    list2_not_in_list1 = [value for value in list2 if value.lower() in list2_not_in_list1_lower]
+
+    compare_dict["common"] = common_elements
+    compare_dict["not_found_types"] = list1_not_in_list2
+    compare_dict["other_types"] = list2_not_in_list1
+
+    return compare_dict
